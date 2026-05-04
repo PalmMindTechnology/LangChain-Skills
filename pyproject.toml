@@ -1,0 +1,17 @@
+[project]
+name = "agent-skills"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi>=0.136.1",
+    "grandalf>=0.8",
+    "langchain>=1.2.15",
+    "langchain-classic>=1.0.4",
+    "langchain-openai>=1.2.1",
+    "langgraph-checkpoint-redis>=0.4.1",
+    "loguru>=0.7.3",
+    "pydantic-settings>=2.14.0",
+    "uvicorn>=0.46.0",
+]
