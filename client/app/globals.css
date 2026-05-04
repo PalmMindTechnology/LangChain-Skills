@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #09090b;
+  --foreground: #f4f4f5;
+  --card: #09090b;
+  --card-foreground: #f4f4f5;
+  --popover: #09090b;
+  --popover-foreground: #f4f4f5;
+  --primary: #f4f4f5;
+  --primary-foreground: #09090b;
+  --secondary: #27272a;
+  --secondary-foreground: #f4f4f5;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #27272a;
+  --accent-foreground: #f4f4f5;
+  --destructive: #7f1d1d;
+  --destructive-foreground: #f4f4f5;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #d4d4d8;
+}
+
+@layer base {
+  * {
+    @apply border-zinc-800;
+  }
+
+  body {
+    @apply bg-zinc-950 text-zinc-100;
+  }
+}
+
+/* Minimalist scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-zinc-800 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-zinc-700;
+}
+
+.cursor-blink::after {
+  content: "▋";
+  @apply animate-blink text-zinc-400 ml-0.5;
+  font-size: 0.9em;
+}
+
+.skill-pill {
+  @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-zinc-800 border border-zinc-700 text-zinc-400 font-mono text-[10px] uppercase tracking-wider;
+}
+
+.message-enter {
+  @apply animate-fade-up;
+}
