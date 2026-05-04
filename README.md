@@ -1,40 +1,9 @@
-agent_skills/
-│
-├── app/
-│   ├── main.py
-│   ├── agent/
-│   │   ├── builder.py
-│   │   ├── executor.py
-│   │   └── skill_loader.py
-│   │
-│   ├── skills/
-│   │   ├── registry.py
-│   │   │
-│   │   ├── sql_skill/
-│   │   │   ├── skill.py
-│   │   │   ├── prompt.md
-│   │   │   └── tools.py
-│   │   │
-│   │   ├── rag_skill/
-│   │   │   ├── skill.py
-│   │   │   ├── prompt.md
-│   │   │   └── tools.py
-│   │   │
-│   │   └── support_skill/
-│   │       ├── skill.py
-│   │       ├── prompt.md
-│   │       └── tools.py
-│   │
-│   ├── tools/
-│   │   ├── sql_tools.py
-│   │   ├── rag_tools.py
-│   │   └── shared_tools.py
-│   │
-│   ├── utils/
-│   │   ├── embedding.py
-│   │   ├── skill_matcher.py
-│   │   └── logger.py
-│   │
-│   └── config.py
-│
-└── requirements.txt
+## LangChain Skills
+
+![Image](assets/agent_skills.png)
+
+
+A modular skills-based agent architecture using LangChain tools, where each user request is routed to a specialized skill for deterministic and reliable responses.
+
+Instead of a single monolithic chatbot, the system uses multiple specialized skills, each responsible for a specific domain.
+
