@@ -21,7 +21,6 @@ export async function sendMessage(req: ChatRequest): Promise<ChatResponse> {
 
   return await res.json();
 }
-
 export async function* streamMessage(
   req: ChatRequest
 ): AsyncGenerator<string, void, unknown> {
@@ -39,22 +38,25 @@ export async function* streamMessage(
 
   const reader = res.body.getReader();
   const decoder = new TextDecoder();
+  let buffer = "";
 
   try {
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
 
-      const chunk = decoder.decode(value, { stream: true });
-      const lines = chunk.split("\n");
+      buffer += decoder.decode(value, { stream: true });
+
+      // Split on SSE line endings, keep incomplete line in buffer
+      const lines = buffer.split("\n");
+      buffer = lines.pop() ?? "";
 
       for (const line of lines) {
-        const trimmed = line.trim();
-        if (trimmed.startsWith("data: ")) {
-          const data = trimmed.slice(6).trim();
+        if (line.startsWith("data: ")) {
+          const data = line.slice(6); // NO .trim() — preserves leading spaces
           if (data === "[DONE]") return;
           if (data) yield data;
-        } else if (trimmed.startsWith("event: error")) {
+        } else if (line.startsWith("event: error")) {
           throw new Error("Server sent stream error");
         }
       }

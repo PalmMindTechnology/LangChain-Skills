@@ -1,6 +1,7 @@
 "use client";
 
 import { Message } from "@/types/chat";
+import StreamingMessage from "@/components/StreamingMessage";
 import clsx from "clsx";
 
 interface Props {
@@ -49,28 +50,28 @@ export default function MessageBubble({ message }: Props) {
 
       <div className={clsx("flex flex-col gap-2 max-w-[85%]", isUser && "items-end")}>
         {/* Bubble */}
-        <div
-          className={clsx(
-            "relative rounded-2xl px-4 py-2.5 text-sm leading-relaxed",
-            isUser
-              ? "bg-zinc-100 text-zinc-950 font-medium"
-              : clsx(
-                  "text-zinc-200 bg-zinc-900 border border-zinc-800",
-                  message.error && "border-red-900/50 bg-red-950/10 text-red-200"
-                )
-          )}
-        >
+        <div className={clsx(
+          "relative rounded-2xl px-4 py-2.5 text-sm leading-relaxed",
+          isUser
+            ? "bg-zinc-100 text-zinc-950 font-medium"
+            : clsx(
+              "text-zinc-200 bg-zinc-900 border border-zinc-800",
+              message.error && "border-red-900/50 bg-red-950/10 text-red-200"
+            )
+        )}>
           {message.error && (
             <span className="text-red-500 mr-2">⚠</span>
           )}
-          <span
-            className={clsx(
-              "font-sans whitespace-pre-wrap break-words",
-              message.streaming && "cursor-blink"
-            )}
-          >
-            {message.content || (message.streaming ? "" : "…")}
-          </span>
+          {isUser ? (
+            <span className="font-sans whitespace-pre-wrap break-words">
+              {message.content}
+            </span>
+          ) : (
+            <StreamingMessage
+              content={message.content}
+              isStreaming={message.streaming ?? false}
+            />
+          )}
         </div>
 
         {/* Skills & Metadata */}
@@ -84,7 +85,7 @@ export default function MessageBubble({ message }: Props) {
               ))}
             </div>
           )}
-          
+
           <span className="text-[10px] text-zinc-500 font-mono">
             {formatTime(message.timestamp)}
           </span>

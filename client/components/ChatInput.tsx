@@ -10,7 +10,12 @@ interface Props {
   onToggleStream: (val: boolean) => void;
 }
 
-export default function ChatInput({ onSend, isLoading, useStreaming, onToggleStream }: Props) {
+export default function ChatInput({
+  onSend,
+  isLoading,
+  useStreaming,
+  onToggleStream,
+}: Props) {
   const [value, setValue] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -64,16 +69,21 @@ export default function ChatInput({ onSend, isLoading, useStreaming, onToggleStr
         <div className="flex items-center justify-between px-2 pb-1 pt-1">
           <div className="flex items-center gap-2">
             <button
+              type="button"
               onClick={() => onToggleStream(!useStreaming)}
               className={clsx(
                 "flex items-center gap-1.5 px-2 py-1 rounded-md text-[10px] font-mono uppercase tracking-wider transition-colors",
-                useStreaming ? "text-zinc-100 bg-zinc-800" : "text-zinc-500 hover:text-zinc-400"
+                useStreaming
+                  ? "text-zinc-100 bg-zinc-800"
+                  : "text-zinc-500 hover:text-zinc-400"
               )}
             >
-              <div className={clsx(
-                "w-1.5 h-1.5 rounded-full",
-                useStreaming ? "bg-zinc-100 animate-pulse" : "bg-zinc-600"
-              )} />
+              <div
+                className={clsx(
+                  "w-1.5 h-1.5 rounded-full",
+                  useStreaming ? "bg-zinc-100 animate-pulse" : "bg-zinc-600"
+                )}
+              />
               Stream
             </button>
           </div>
@@ -83,6 +93,7 @@ export default function ChatInput({ onSend, isLoading, useStreaming, onToggleStr
               ⏎ Send
             </span>
             <button
+              type="submit"
               onClick={handleSend}
               disabled={!value.trim() || isLoading}
               className={clsx(
@@ -93,11 +104,28 @@ export default function ChatInput({ onSend, isLoading, useStreaming, onToggleStr
               )}
             >
               {isLoading ? (
-                <svg className="animate-spin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                <svg
+                  className="animate-spin"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                >
                   <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
                 </svg>
               ) : (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="m5 12 7-7 7 7" />
                   <path d="M12 19V5" />
                 </svg>

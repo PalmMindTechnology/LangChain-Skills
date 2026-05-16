@@ -54,14 +54,12 @@ export function useChat() {
         if (useStreaming) {
           let accumulated = "";
           for await (const token of streamMessage({
-              message: text,
-              thread_id: threadId.current,
-            })) {
-              if (token === text) continue;  // skip if token is the user's own message
-              accumulated += token;
-              updateMessage(assistantId, { content: accumulated });
-            }
-        updateMessage(assistantId, { streaming: false });
+            message: text,
+            thread_id: threadId.current,
+          })) {
+            accumulated += token;
+            updateMessage(assistantId, { content: accumulated });
+          }
         } else {
           const resp = await sendMessage({
             message: text,
@@ -70,17 +68,17 @@ export function useChat() {
           updateMessage(assistantId, {
             content: resp.reply,
             loaded_skills: resp.loaded_skills,
-            streaming: false,
           });
         }
       } catch (err) {
         const msg = err instanceof Error ? err.message : "Unknown error";
         updateMessage(assistantId, {
           content: `Error: ${msg}`,
-          streaming: false,
           error: true,
         });
       } finally {
+        // Always clear streaming flag, regardless of success or error
+        updateMessage(assistantId, { streaming: false });
         setIsLoading(false);
       }
     },
