@@ -24,9 +24,10 @@ def setup_logging():
 
     # Colorized format for console
     console_format = (
-        "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
-        "<level>{level: <8}</level> | "
-        "<cyan>{name}</cyan> | <blue>{function}</blue>:<cyan>{line}</cyan> --- "
+        # "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
+        "<green>{time:HH:mm:ss}</green> | "
+        "<level>{level: <8}</level>|"
+        "<cyan>{name}</cyan>|<blue>{function}</blue>:<cyan>{line}</cyan> "
         "<level>{message}</level>"
     )
 

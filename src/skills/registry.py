@@ -2,16 +2,17 @@ from src.schemas.skill import SkillRegistry
 from src.utils.helper import load_md
 from src.utils.logging import logger
 
-from src.tools.booking import BOOKING_TOOLS
-from src.tools.rag import RAG_TOOLS
-from src.tools.retention import RETENTION_TOOLS
-from src.tools.frustration import FRUSTRATION_TOOLS
-
+from src.tools import (
+    BOOKING_TOOLS,
+    RAG_TOOLS,
+    RETENTION_TOOLS,
+    FRUSTRATION_TOOLS,
+)
 
 
 SKILLS: list[SkillRegistry] = [
     SkillRegistry(
-        name="appointment_booking",
+        name="booking",
         description="Use when the user wants to book, schedule, reschedule, cancel, or check availability for an appointment. Also trigger when the user is trying to confirm timing, slots, or manage existing bookings.",
         content=load_md("BOOKING.md"),
         tools=BOOKING_TOOLS,
@@ -39,6 +40,6 @@ SKILLS: list[SkillRegistry] = [
     ),
 ]
 
-# Skill dict map instance
+# # Skill dict map instance
 SKILL_MAP: dict[str, SkillRegistry] = {s.name: s for s in SKILLS}
-logger.info("Skill map loaded | count={}", len(SKILL_MAP))
+# logger.info("Skill map loaded | count={}", len(SKILL_MAP))
